@@ -46,8 +46,8 @@ with st.form("prediction_form"):
         day_of_week = st.selectbox("Last Contact Day", ["mon", "tue", "wed", "thu", "fri"])
 
     with col3:
-        duration = st.slider("Last Call Duration (sec)", min_value=0, max_value=5000, step=10, value=100)
-        campaign = st.slider("Campaign Contact Count", min_value=1, max_value=50, step=1, value=1)
+        duration = st.number_input("Last Call Duration (sec)", min_value=0, max_value=5000, step=10, value=100)
+        campaign = st.number_input("Campaign Contact Count", min_value=1, max_value=50, step=1, value=3)
         pdays = st.number_input("Days Since Last Contact", min_value=-1, max_value=999, value=999)
         previous = st.number_input("Previous Campaign Contacts", min_value=0, max_value=50, value=0)
         poutcome = st.selectbox("Previous Campaign Outcome", ["success", "failure", "nonexistent", "unknown"])
