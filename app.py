@@ -105,3 +105,18 @@ if submitted:
 
     except Exception as e:
         st.warning(f"An error occurred: {e}")
+
+from datetime import datetime
+now = datetime.now().strftime("%Y-%m-%d %H:%M")
+st.caption(f"🕒 Prediction made at: {now}")
+
+
+with st.expander("ℹ️ About this app"):
+    st.markdown("""
+    This application was developed as part of the **ADA442 - Statistical Learning** course.
+
+    - **Model used**: Decision Tree  
+    - **Dataset**: Bank Dataset  
+    - **Created by**: Group 15
+    """)
+
