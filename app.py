@@ -116,7 +116,7 @@ with st.expander("ℹ️ About this app"):
     This application was developed as part of the **ADA442 - Statistical Learning** course.
 
     - **Model used**: Decision Tree  
-    - **Dataset**: Bank Dataset  
+    - **Dataset**: Bank Marketing Dataset  
     - **Created by**: Group 15
     """)
 
