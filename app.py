@@ -29,7 +29,7 @@ with st.form("prediction_form"):
 
     with col1:
         age = st.number_input("Age", min_value=18, max_value=100, value=30)
-        job = st.selectbox("Occupation", [
+        job = st.selectbox("Job", [
             "admin.", "blue-collar", "entrepreneur", "housemaid", "management",
             "retired", "self-employed", "services", "student", "technician", "unemployed", "unknown"
         ])
