@@ -14,9 +14,33 @@ def load_model():
 
 model, selected_features = load_model()
 
+# --- Label Mapping for Prettier Field Names ---
+label_map = {
+    "age": "Age",
+    "job": "Job Title",
+    "marital": "Marital Status",
+    "education": "Education Level",
+    "default": "Has Credit in Default?",
+    "housing": "Has Housing Loan?",
+    "loan": "Has Personal Loan?",
+    "contact": "Contact Type",
+    "month": "Last Contact Month",
+    "day_of_week": "Last Contact Day",
+    "duration": "Last Call Duration (sec)",
+    "campaign": "Current Campaign Contacts",
+    "pdays": "Days Since Last Contact",
+    "previous": "Previous Campaign Contacts",
+    "poutcome": "Previous Campaign Outcome",
+    "emp.var.rate": "Employment Variation Rate",
+    "cons.price.idx": "Consumer Price Index",
+    "cons.conf.idx": "Consumer Confidence Index",
+    "euribor3m": "Euribor 3-Month Rate",
+    "nr.employed": "Number of Employees"
+}
+
 # --- Title ---
 st.title("📊 Bank Term Deposit Prediction")
-st.write("Predict whether a client will subscribe to a term deposit using machine learning.")
+st.write("Predict whether a bank client will subscribe to a term deposit using a machine learning model trained on past campaign data.")
 
 # --- Input Form ---
 with st.form("prediction_form"):
@@ -26,7 +50,8 @@ with st.form("prediction_form"):
     user_inputs = {}
     for i, feature in enumerate(selected_features):
         with cols[i % 3]:
-            user_inputs[feature] = st.text_input(f"{feature}", placeholder="Enter a value...")
+            label = label_map.get(feature, feature)
+            user_inputs[feature] = st.text_input(label, placeholder="Enter a value...")
 
     submitted = st.form_submit_button("🔮 Predict")
 
@@ -49,7 +74,7 @@ if submitted:
         if prediction_proba is not None:
             st.info(f"🔢 Probability of 'yes': **{prediction_proba[1] * 100:.2f}%**")
 
-        st.caption("📌 Note: This prediction is based on a pre-trained model using past campaign data.")
+        st.caption("📌 Note: This prediction is made using a pre-trained machine learning model.")
 
     except Exception as e:
         st.warning(f"⚠️ An error occurred: {e}")
