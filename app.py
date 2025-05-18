@@ -2,10 +2,10 @@ import streamlit as st
 import pandas as pd
 import pickle
 
-# --- Sayfa Ayarları ---
-st.set_page_config(page_title="Bank Term Deposit Tahmini", layout="centered", page_icon="💰")
+# --- Page Config ---
+st.set_page_config(page_title="Bank Term Deposit Prediction", layout="centered", page_icon="💰")
 
-# --- Modeli Yükle ---
+# --- Load Model ---
 @st.cache_resource
 def load_model():
     with open('best_model_1_decision_tree.pkl', 'rb') as file:
@@ -14,23 +14,23 @@ def load_model():
 
 model, selected_features = load_model()
 
-# --- Başlık ---
-st.title("📊 Banka Vadeli Mevduat Tahmini")
-st.write("Müşterinin vadeli mevduat alıp almayacağını tahmin eden makine öğrenmesi uygulaması.")
+# --- Title ---
+st.title("📊 Bank Term Deposit Prediction")
+st.write("Predict whether a client will subscribe to a term deposit using machine learning.")
 
-# --- Tahmin Formu ---
+# --- Input Form ---
 with st.form("prediction_form"):
-    st.subheader("🧾 Müşteri Bilgileri Girişi")
+    st.subheader("🧾 Client Information Input")
     cols = st.columns(3)
 
     user_inputs = {}
     for i, feature in enumerate(selected_features):
         with cols[i % 3]:
-            user_inputs[feature] = st.text_input(f"{feature}", placeholder="Değer girin...")
+            user_inputs[feature] = st.text_input(f"{feature}", placeholder="Enter a value...")
 
-    submitted = st.form_submit_button("🔮 Tahmin Et")
+    submitted = st.form_submit_button("🔮 Predict")
 
-# --- Tahmin İşlemi ---
+# --- Prediction ---
 if submitted:
     try:
         input_df = pd.DataFrame([user_inputs])
@@ -42,14 +42,14 @@ if submitted:
             prediction_proba = model.predict_proba(input_df)[0]
 
         if prediction == 'yes':
-            st.success("✅ Bu müşteri **vadeli mevduat alacak gibi görünüyor.**")
+            st.success("✅ The client is likely to **subscribe** to a term deposit.")
         else:
-            st.error("❌ Bu müşteri **almayacak gibi duruyor.**")
+            st.error("❌ The client is **not likely** to subscribe.")
 
         if prediction_proba is not None:
-            st.info(f"🔢 Tahmin olasılığı (yes): %{prediction_proba[1] * 100:.2f}")
+            st.info(f"🔢 Probability of 'yes': **{prediction_proba[1] * 100:.2f}%**")
 
-        st.caption("📌 Not: Bu tahmin eğitim verisiyle eğitilmiş bir modelle yapılmıştır.")
+        st.caption("📌 Note: This prediction is based on a pre-trained model using past campaign data.")
 
     except Exception as e:
-        st.warning(f"Hata oluştu: {e}")
+        st.warning(f"⚠️ An error occurred: {e}")
