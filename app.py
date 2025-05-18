@@ -52,7 +52,7 @@ with st.form("prediction_form"):
         previous = st.number_input("Previous Campaign Contacts", min_value=0, max_value=50, value=0)
         poutcome = st.selectbox("Previous Campaign Outcome", ["success", "failure", "nonexistent", "unknown"])
 
-    st.subheader("📊 Economic Indicators")
+    st.subheader("Economic Indicators")
     col4, col5, col6 = st.columns(3)
 
     with col4:
