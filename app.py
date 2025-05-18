@@ -86,44 +86,9 @@ if submitted:
         "nr.employed": nr_employed
     }])
 
-    from sklearn.preprocessing import OneHotEncoder
-
-# OneHot için sütunlar (kategorik)
-categorical_cols = ["job", "marital", "education", "default", "housing", "loan",
-                    "contact", "month", "day_of_week", "poutcome"]
-
-# Sayısal olanlar zaten numeric
-numeric_cols = [col for col in input_data.columns if col not in categorical_cols]
-
-# OneHotEncoder hazırla
-encoder = OneHotEncoder(drop='first', sparse_output=False, handle_unknown='ignore')
-encoded_array = encoder.fit_transform(input_data[categorical_cols])
-
-# Encode edilen DataFrame
-encoded_df = pd.DataFrame(
-    encoded_array,
-    columns=encoder.get_feature_names_out(categorical_cols),
-    index=input_data.index
-)
-
-# Numeric veriyi al
-numeric_df = input_data[numeric_cols]
-
-# Final DataFrame = numeric + encoded
-final_input = pd.concat([numeric_df, encoded_df], axis=1)
-
-# ✨ Eksik kalan kolonları modelin beklediği şekilde tamamla
-for col in model.feature_names_in_:
-    if col not in final_input.columns:
-        final_input[col] = 0  # eksik olan varsa sıfırla
-
-# Kolon sırasını hizala
-final_input = final_input[model.feature_names_in_]
-
 
     try:
         prediction = model.predict(final_input)[0]
-        prediction_proba = model.predict_proba(final_input)[0]
         prediction_proba = None
 
         if hasattr(model, "predict_proba"):
