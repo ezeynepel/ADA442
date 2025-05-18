@@ -92,6 +92,12 @@ if submit:
 
     input_df = pd.DataFrame([input_dict])
 
+    # 💥 Kritik düzeltme: Eksik feature'ları tamamla, sıraya sok
+    missing_cols = set(model.feature_names_in_) - set(input_df.columns)
+    for col in missing_cols:
+        input_df[col] = 0
+    input_df = input_df[model.feature_names_in_]
+
     with st.spinner("Making prediction..."):
         prediction = model.predict(input_df)[0]
         prob = model.predict_proba(input_df)[0][1]
