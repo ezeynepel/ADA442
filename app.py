@@ -3,7 +3,7 @@ import pandas as pd
 import pickle
 
 # --- Page Settings ---
-st.set_page_config(page_title="Term Deposit Prediction", layout="centered", page_icon="💰")
+st.set_page_config(page_title="Term Deposit Prediction", layout="centered")
 
 # --- Load Model ---
 @st.cache_resource
@@ -15,12 +15,12 @@ def load_model():
 model, selected_features = load_model()
 
 # --- App Title ---
-st.title("🏦 Term Deposit Subscription Prediction")
+st.title("Term Deposit Subscription Prediction")
 st.markdown("Fill in the client's information below to predict whether they are likely to **subscribe** to a bank term deposit.")
 
 # --- Input Form ---
 with st.form("prediction_form"):
-    st.subheader("📋 Client Information")
+    st.subheader("Client Information")
     col1, col2, col3 = st.columns(3)
 
     with col1:
@@ -68,7 +68,7 @@ with st.form("prediction_form"):
     with col8:
         nr_employed = st.number_input("Number of Employees in the Company", value=5000.0, step=1.0)
 
-    submit = st.form_submit_button("🔮 Predict")
+    submit = st.form_submit_button("Predict")
 
 # --- Prediction Output ---
 if submit:
@@ -107,9 +107,9 @@ if submit:
             st.error("❌ The client is **not likely** to subscribe.")
 
         if prediction_proba is not None:
-            st.info(f"🔢 Probability of 'yes': **{prediction_proba[1] * 100:.2f}%**")
+            st.info(f"Probability of 'yes': **{prediction_proba[1] * 100:.2f}%**")
 
-        st.caption("📌 Note: This prediction is based on past marketing campaign data.")
+        st.caption("Note: This prediction is based on past marketing campaign data.")
 
     except Exception as e:
-        st.warning(f"⚠️ Error occurred: {e}")
+        st.warning(f"Error occurred: {e}")
