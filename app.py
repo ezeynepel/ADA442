@@ -17,7 +17,8 @@ model, selected_features = load_model()
 # Title and intro
 st.title("Term Deposit Subscription Prediction")
 st.markdown("""
-Use the form below to enter client information and predict whether the client will subscribe to a **bank term deposit**.
+Use the form below to enter client information and predict whether the client will subscribe to a
+**bank term deposit**.
 """)
 
 # Form
