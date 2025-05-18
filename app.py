@@ -88,7 +88,7 @@ if submitted:
 
 
     try:
-        prediction = model.predict(final_input)[0]
+        prediction = model.predict(input_data)[0]
         prediction_proba = None
 
         if hasattr(model, "predict_proba"):
