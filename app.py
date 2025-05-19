@@ -105,14 +105,3 @@ if st.button("Predict"):
     except Exception as e:
         st.error(f"An error occurred during prediction: {e}")
 
-
-st.markdown(\"\"\"<hr style="margin-top: 3rem; margin-bottom: 1rem;">\"\"\", unsafe_allow_html=True)
-
-st.markdown(
-    "<p style='text-align: center; color: gray;'>"
-    "This project was prepared for the <b>ADA 442 - Statistical Learning</b> course at "
-    "<b>TED University</b>."
-    "</p>",
-    unsafe_allow_html=True
-)
-
