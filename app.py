@@ -9,14 +9,14 @@ st.markdown("""
 This app predicts whether a client will subscribe to a term deposit, based on their information and economic indicators.
 """)
 
-# --- Modeli yükle ---
-@st.cache_resource
-def load_model():
-    with open("final_model_with_pipeline.pkl", "rb") as f:
-        data = pickle.load(f)
-    return data["model"]
+def load_model(model_path):
+    with open(model_path, "rb") as file:
+        loaded_object = pickle.load(file)
+    if isinstance(loaded_object, dict):
+        return loaded_object.get("model", None)
+    return loaded_object
+model = load_model("models/final_model_with_pipeline.pkl")
 
-model = load_model()
 
 # --- Form ---
 with st.form(key="user_input_form"):
@@ -92,7 +92,7 @@ if submit:
 
     input_df = pd.DataFrame([input_dict])
 
-    # 💥 Kritik düzeltme: Eksik feature'ları tamamla, sıraya sok
+    # Kritik düzeltme: Eksik feature'ları tamamla, sıraya sok
     missing_cols = set(model.feature_names_in_) - set(input_df.columns)
     for col in missing_cols:
         input_df[col] = 0
@@ -106,3 +106,5 @@ if submit:
         st.success(f"✅ The client is LIKELY to subscribe. (Probability: {prob:.2f})")
     else:
         st.error(f"❌ The client is UNLIKELY to subscribe. (Probability: {prob:.2f})")
+
+
