@@ -18,7 +18,7 @@ def load_model(model_path):
 
 # Load the selected model
 model_folder = "models"
-model_path = os.path.join(model_folder, final_model_with_pipeline.pkl)
+model_path = "final_model_with_pipeline.pkl"
 model = load_model(model_path)
 
 st.title("ADA 442 Statistical Learning | Classification")
