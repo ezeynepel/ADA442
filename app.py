@@ -34,7 +34,7 @@ with col1:
     education = st.selectbox("Education", [
         "illiterate", "basic.4y", "basic.6y", "basic.9y", 
         "high.school", "professional.course", "university.degree"])
-    default = st.selectbox("Default Credit", ["yes", "no"])
+    default = st.selectbox("Default Credit", ["yes", "no", "unknown"])
 
 with col2:
     housing = st.selectbox("Housing Loan", ["yes", "no"])
