@@ -93,6 +93,24 @@ input_data = pd.DataFrame([{
     "nr.employed": nr_employed
 }])
 
+# Sidebar Title
+st.sidebar.title("Select Model")
+
+# Sidebar'daki dropdown (selectbox)
+models_available = {
+    "Model 1: Decision Tree": "best_model_1_decision_tree.pkl",
+    "Model 2: Logistic Regression (Robust Scaler)": "best_model_2_log_reg_RobustScaler.pkl",
+    "Model 3: Logistic Regression (Standard Scaler)": "best_model_3_log_reg_StandardScaler.pkl",
+}
+selected_model_name = st.sidebar.selectbox("Choose a model", list(models_available.keys()))
+
+# Sidebar'a açıklama ekleme (model detayları)
+model_info = {
+    "Model 1: Decision Tree": "### Info for Model 1...",
+    "Model 2: Logistic Regression (Robust Scaler)": "### Info for Model 2...",
+    "Model 3: Logistic Regression (Standard Scaler)": "### Info for Model 3..."
+}
+st.sidebar.markdown(model_info[selected_model_name])
 
 gap1, center, gap2 = st.columns([2, 1, 2])
 with center:
