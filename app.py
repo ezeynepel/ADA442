@@ -93,12 +93,12 @@ input_data = pd.DataFrame([{
     "nr.employed": nr_employed
 }])
 
-col_a, col_b, col_c = st.columns([1, 2, 1])
-with col_b:
-    predict_button = st.button("🔮 Predict")
+
 
 # --- Prediction ---
-if st.button("Predict"):
+if (col_a, col_b, col_c = st.columns([1, 2, 1])
+    with col_b:
+    predict_button = st.button("🔮 Predict")):
     try:
         prediction = model.predict(input_data)
         if prediction[0] == 'yes':
