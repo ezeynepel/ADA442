@@ -14,6 +14,8 @@ def load_model():
 
 model = load_model()
 
+st.set_page_config(page_title="Bank Term Deposit Predictor", layout="wide")
+
 # --- Title and description ---
 st.title("ADA 442 | Final Project – Bank Term Deposit Prediction")
 
