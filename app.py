@@ -97,9 +97,12 @@ input_data = pd.DataFrame([{
 if st.button("Predict"):
     try:
         prediction = model.predict(input_data)
-        st.success(f"Prediction: {'Yes' if prediction[0] == 'yes' 
-                                          st.balloons()  
-                                          st.snow()      
-                                        else 'No'}")
+        if prediction[0] == 'yes':
+            st.success("Prediction: Yes – The client is likely to subscribe!")
+            st.balloons()
+            st.snow()
+        else:
+            st.warning("Prediction: No – The client is unlikely to subscribe.")
     except Exception as e:
-        st.error(f"Prediction failed: {e}")
+        st.error(f"An error occurred during prediction: {e}")
+
