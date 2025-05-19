@@ -15,62 +15,10 @@ def load_model(model_path):
         return loaded_object.get("model", None)
     return loaded_object
 
-# Sidebar for model selection
-st.sidebar.title("Select Model")
-models_available = {
-    "Model 1: Decision Tree": "best_model_1_decision_tree.pkl",
-    "Model 2: Logistic Regression (Robust Scaler)": "best_model_2_log_reg_RobustScaler.pkl",
-    "Model 3: Logistic Regression (Standard Scaler)": "best_model_3_log_reg_StandardScaler.pkl",
-}
-selected_model_name = st.sidebar.selectbox("Choose a model", list(models_available.keys()))
-
-# Display model information below the model selection part
-model_info = {
-    "Model 1: Decision Tree": """
-    ### Model Information: Model 1
-    - **Type**: Decision Tree Classifier
-    - **Details**: 
-      - Max Depth: 5
-      - Min Samples Split: 2
-    - **Accuracy**: 0.9108 (Cross-validated)
-    - **F1 Score**: 0.9082
-    - **Precision**: 0.9120
-    - **Recall**: 0.9053
-    """,
-    "Model 2: Logistic Regression (Robust Scaler)": """
-    ### Model Information: Model 2
-    - **Type**: Logistic Regression
-    - **Scaler**: Robust Scaler
-    - **Details**: 
-      - C: 10
-      - Penalty: l2
-      - Solver: lbfgs
-    - **Accuracy**: 0.9162 (Cross-validated)
-    - **F1 Score**: 0.9007
-    - **Precision**: 0.8980
-    - **Recall**: 0.9090
-    """,
-    "Model 3: Logistic Regression (Standard Scaler)": """
-    ### Model Information: Model 3
-    - **Type**: Logistic Regression
-    - **Scaler**: Standard Scaler
-    - **Details**: 
-      - C: 10
-      - Penalty: l2
-      - Solver: lbfgs
-    - **Accuracy**: 0.9175 (Cross-validated)
-    - **F1 Score**: 0.8997
-    - **Precision**: 0.8968
-    - **Recall**: 0.9078
-    """
-}
-
-
-st.sidebar.markdown(model_info[selected_model_name])
 
 # Load the selected model
 model_folder = "models"
-model_path = os.path.join(model_folder, models_available[selected_model_name])
+model_path = os.path.join(model_folder, models_available[final_model_with_pipeline.pkl])
 model = load_model(model_path)
 
 st.title("ADA 442 Statistical Learning | Classification")
