@@ -28,22 +28,30 @@ with st.form(key="user_input_form"):
     col1, col2, col3 = st.columns(3)
 
     with col1:
-        age = st.number_input("Age", min_value=18, max_value=100, value=30)
-        job = st.selectbox("Job", ['admin.', 'blue-collar', 'entrepreneur', 'housemaid', 'management',
-                                   'retired', 'self-employed', 'services', 'student', 'technician',
-                                   'unemployed', 'unknown'])
-        marital = st.selectbox("Marital Status", ['divorced', 'married', 'single', 'unknown'])
-        education = st.selectbox("Education", ['primary', 'secondary', 'tertiary', 'unknown'])
+    age = st.number_input("Age", min_value=18, max_value=100, value=30)
+    job = st.selectbox("Job", [
+        'admin.', 'blue-collar', 'entrepreneur', 'housemaid', 'management',
+        'retired', 'self-employed', 'services', 'student', 'technician', 'unemployed', 'unknown'
+    ])
+    marital = st.selectbox("Marital Status", ['divorced', 'married', 'single', 'unknown'])
+    education = st.selectbox("Education", [
+        'illiterate', 'basic.4y', 'basic.6y', 'basic.9y',
+        'high.school', 'professional.course', 'university.degree'
+    ])
+
+
 
     with col2:
         default = st.selectbox("Has Default Credit?", ['yes', 'no'])
         housing = st.selectbox("Has Housing Loan?", ['yes', 'no'])
         loan = st.selectbox("Has Personal Loan?", ['yes', 'no'])
-        contact = st.selectbox("Contact Type", ['cellular', 'telephone', 'unknown'])
+        contact = st.selectbox("Contact Type", ['cellular', 'telephone'])
 
     with col3:
-        month = st.selectbox("Last Contact Month", ['jan', 'feb', 'mar', 'apr', 'may', 'jun',
-                                                    'jul', 'aug', 'sep', 'oct', 'nov', 'dec'])
+        month = st.selectbox("Last Contact Month", [
+            'jan', 'feb', 'mar', 'apr', 'may', 'jun',
+            'jul', 'aug', 'sep', 'oct', 'nov', 'dec'
+            ])
         day_of_week = st.selectbox("Last Contact Day", ['mon', 'tue', 'wed', 'thu', 'fri'])
         duration = st.number_input("Last Call Duration (sec)", min_value=0, value=100)
 
