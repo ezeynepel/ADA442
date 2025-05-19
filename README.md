@@ -1,4 +1,3 @@
-# ADA442
 # Bank Term Deposit Predictor
 
 This is a **Streamlit-based web application** developed for the course **ADA 442 - Statistical Learning** at **TED University**. 
