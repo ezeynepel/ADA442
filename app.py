@@ -106,7 +106,7 @@ if st.button("Predict"):
         st.error(f"An error occurred during prediction: {e}")
 
 
-st.markdown("This is a test footer.", unsafe_allow_html=True)
+
 
 # --- Footer ---
 st.markdown("""<hr style="margin-top: 3rem; margin-bottom: 1rem;">""", unsafe_allow_html=True)
