@@ -41,6 +41,7 @@ with st.form(key="user_input_form"):
 
 
 
+
     with col2:
         default = st.selectbox("Has Default Credit?", ['yes', 'no'])
         housing = st.selectbox("Has Housing Loan?", ['yes', 'no'])
