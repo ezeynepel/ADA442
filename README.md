@@ -6,6 +6,11 @@ The goal of the project is to predict whether a bank client will subscribe to a 
 
 ---
 
+### ▶️ Try It Online  
+🔗 [https://ada442-project.streamlit.app/](https://ada442-project.streamlit.app/)
+
+---
+
 ## Model Overview
 
 - **Model Type**: Logistic Regression
