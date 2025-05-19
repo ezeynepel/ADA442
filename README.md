@@ -4,12 +4,12 @@
 This is a **Streamlit-based web application** developed for the course **ADA 442 - Statistical Learning** at **TED University**. 
 The goal of the project is to predict whether a bank client will subscribe to a term deposit based on features obtained through direct marketing campaigns.
 
----
 
-### ▶️ Try It Online  
+
+### Try It Online  
 🔗 [https://ada442-project.streamlit.app/](https://ada442-project.streamlit.app/)
 
----
+
 
 ## Model Overview
 
