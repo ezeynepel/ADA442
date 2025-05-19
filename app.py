@@ -37,8 +37,8 @@ with col1:
     default = st.selectbox("Default Credit", ["yes", "no", "unknown"])
 
 with col2:
-    housing = st.selectbox("Housing Loan", ["yes", "no"])
-    loan = st.selectbox("Personal Loan", ["yes", "no"])
+    housing = st.selectbox("Housing Loan", ["yes", "no", "unknown"])
+    loan = st.selectbox("Personal Loan", ["yes", "no", "unknown"])
     emp_var_rate = st.number_input("Empirical Var. Rate", step=0.01)
     cons_price_idx = st.number_input("Consumer Price Index", step=0.01) 
     cons_conf_idx = st.number_input("Consumer Confidence Index", step=0.01)
