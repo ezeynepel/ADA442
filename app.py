@@ -96,7 +96,7 @@ input_data = pd.DataFrame([{
 
 gap1, center, gap2 = st.columns([2, 1, 2])
 with center:
-    predict_button = st.button("🔮 Predict")
+    predict_button = st.button("Predict")
 
 # --- Prediction ---
 if predict_button:
