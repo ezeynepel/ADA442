@@ -100,7 +100,6 @@ if st.button("Predict"):
         if prediction[0] == 'yes':
             st.success("Prediction: Yes – The client is likely to subscribe!")
             st.balloons()
-            st.snow()
         else:
             st.warning("Prediction: No – The client is unlikely to subscribe.")
     except Exception as e:
