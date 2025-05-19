@@ -93,25 +93,19 @@ input_data = pd.DataFrame([{
     "nr.employed": nr_employed
 }])
 
-# --- Ortalanmış Predict Butonu ---
 col_a, col_b, col_c = st.columns([1, 2, 1])
 with col_b:
-    predict_button = st.button("Predict")
+    predict_button = st.button("🔮 Predict")
 
-# --- Tahmin ---
-if predict_button:
+# --- Prediction ---
+if st.button("Predict"):
     try:
-        prediction = model.predict(input_df)
-        prob = model.predict_proba(input_df)[0][1]
-
-        result_col1, result_col2, result_col3 = st.columns([1, 2, 1])
-        with result_col2:
-            if prediction[0] == 'yes':
-                st.success(f"The client is LIKELY to subscribe.\n\n**Probability: {prob:.2%}**")
-                st.balloons()
-            else:
-                st.warning(f"The client is UNLIKELY to subscribe.\n\n**Probability: {prob:.2%}**")
-
+        prediction = model.predict(input_data)
+        if prediction[0] == 'yes':
+            st.success("Prediction: Yes – The client is likely to subscribe!")
+            st.balloons()
+        else:
+            st.warning("Prediction: No – The client is unlikely to subscribe.")
     except Exception as e:
         st.error(f"An error occurred during prediction: {e}")
 
@@ -128,4 +122,3 @@ st.markdown(
     "</p>",
     unsafe_allow_html=True
 )
-
