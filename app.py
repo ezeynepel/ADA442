@@ -94,7 +94,7 @@ input_data = pd.DataFrame([{
 }])
 
 
-gap1, center, gap2 = st.columns([10, 1, 10])
+gap1, center, gap2 = st.columns([8, 2, 8])
 with center:
     predict_button = st.button("Predict")
 
