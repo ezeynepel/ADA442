@@ -16,45 +16,44 @@ model = load_model()
 
 # --- Title and description ---
 st.title("ADA 442 | Final Project – Bank Term Deposit Prediction")
-st.markdown("""
-This application uses a trained Logistic Regression model to predict whether a bank client will subscribe to a term deposit based on marketing campaign data.
-""")
 
 # --- Input fields ---
 st.header("Client Information")
 
-col1, col2, col3 = st.columns(3)
+col1, col2, col3, col4 = st.columns(4)
 
 with col1:
     age = st.number_input("Age", min_value=18, max_value=100, step=1)
-    education = st.selectbox("Education", [
-        "illiterate", "basic.4y", "basic.6y", "basic.9y", 
-        "high.school", "professional.course", "university.degree"])
-    default = st.selectbox("Default Credit", ["yes", "no"])
-    contact = st.selectbox("Contact Type", ["cellular", "telephone"])
-    emp_var_rate = st.number_input("Empirical Var. Rate", step=0.01)
-    euribor3m = st.number_input("Euribor 3 Month", step=0.01) 
-    cons_conf_idx = st.number_input("Consumer Confidence Index", step=0.01)
-
-with col2:
     job = st.selectbox("Job", [
         "admin.", "blue-collar", "entrepreneur", "housemaid", 
         "management", "retired", "self-employed", "services", 
         "student", "technician", "unemployed"])
+    marital = st.selectbox("Marital Status", ["married", "single", "divorced"])
+    education = st.selectbox("Education", [
+        "illiterate", "basic.4y", "basic.6y", "basic.9y", 
+        "high.school", "professional.course", "university.degree"])
+    default = st.selectbox("Default Credit", ["yes", "no"])
+
+with col2:
     housing = st.selectbox("Housing Loan", ["yes", "no"])
     loan = st.selectbox("Personal Loan", ["yes", "no"])
+    emp_var_rate = st.number_input("Empirical Var. Rate", step=0.01)
+    cons_price_idx = st.number_input("Consumer Price Index", step=0.01) 
+    cons_conf_idx = st.number_input("Consumer Confidence Index", step=0.01)
+    
+with col3:    
+    contact = st.selectbox("Contact Type", ["cellular", "telephone"])
     month = st.selectbox("Month", ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"])
-    cons_price_idx = st.number_input("Consumer Price Index", step=0.01)
-    nr_employed = st.number_input("Number of Employees", step=1)
-    poutcome = st.selectbox("Previous Outcome", ["success", "failure", "nonexistent"])
-
-with col3:
-    marital = st.selectbox("Marital Status", ["married", "single", "divorced"])
     day_of_week = st.selectbox("Day of Week", ["mon", "tue", "wed", "thu", "fri"])
     duration = st.number_input("Last Call Duration", step=1)
     campaign = st.number_input("Campaign Contacts", step=1)
+    
+with col4:
     pdays = st.number_input("Days Since Last Contact", step=1)
     previous = st.number_input("Previous Contacts", step=1)
+    poutcome = st.selectbox("Previous Outcome", ["success", "failure", "nonexistent"])
+    euribor3m = st.number_input("Euribor 3 Month", step=0.01)
+    nr_employed = st.number_input("Number of Employees", step=1)
    
     
 
