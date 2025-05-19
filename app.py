@@ -1,19 +1,18 @@
 import streamlit as st
 import pickle
 import pandas as pd
-import os
 import warnings
 
 warnings.filterwarnings("ignore")
 
-# --- Sayfa Ayarı ---
+# Sayfa başlığı
 st.set_page_config(page_title="Bank Term Deposit Prediction", layout="wide")
 st.title("📈 Bank Term Deposit Prediction App")
 st.markdown("""
 This app predicts whether a client will subscribe to a term deposit, based on their information and economic indicators.
 """)
 
-# --- Model Yükleme Fonksiyonu ---
+# --- Modeli Yükle ---
 def load_model(model_path):
     with open(model_path, "rb") as file:
         loaded_object = pickle.load(file)
@@ -21,42 +20,9 @@ def load_model(model_path):
         return loaded_object.get("model", None)
     return loaded_object
 
-# --- Model Seçimi ve Bilgi Gösterimi (Sidebar) ---
-st.sidebar.title("Select Model")
-models_available = {
-    "Model 1: Decision Tree": "best_model_1_decision_tree.pkl",
-    "Model 2: Logistic Regression (Robust Scaler)": "best_model_2_log_reg_RobustScaler.pkl",
-    "Model 3: Logistic Regression (Standard Scaler)": "best_model_3_log_reg_StandardScaler.pkl",
-}
-selected_model_name = st.sidebar.selectbox("Choose a model", list(models_available.keys()))
+model = load_model("final_model_with_pipeline.pkl")  # 🟢 Doğru dosya adı
 
-model_info = {
-    "Model 1: Decision Tree": """
-    ### Model 1 - Decision Tree
-    - **Max Depth**: 5
-    - **Accuracy**: 91.08%
-    - **F1 Score**: 0.9082
-    """,
-    "Model 2: Logistic Regression (Robust Scaler)": """
-    ### Model 2 - Logistic Regression (Robust Scaler)
-    - **C**: 10, Penalty: l2, Solver: lbfgs
-    - **Accuracy**: 91.62%
-    - **F1 Score**: 0.9007
-    """,
-    "Model 3: Logistic Regression (Standard Scaler)": """
-    ### Model 3 - Logistic Regression (Standard Scaler)
-    - **C**: 10, Penalty: l2, Solver: lbfgs
-    - **Accuracy**: 91.75%
-    - **F1 Score**: 0.8997
-    """
-}
-st.sidebar.markdown(model_info[selected_model_name])
-
-# Modeli yükle
-model_path = os.path.join("models", models_available[selected_model_name])
-model = load_model(model_path)
-
-# --- Kullanıcıdan Girdi Alma (Form ile) ---
+# --- Form ---
 with st.form(key="user_input_form"):
     st.header("🧾 Client Information")
     col1, col2, col3 = st.columns(3)
@@ -102,7 +68,7 @@ with st.form(key="user_input_form"):
 
     submit = st.form_submit_button("🔮 Predict")
 
-# --- Tahmin Kısmı ---
+# --- Tahmin ---
 if submit:
     input_dict = {
         'age': age,
@@ -129,12 +95,7 @@ if submit:
 
     input_df = pd.DataFrame([input_dict])
 
-    # Eksik kolonları tamamla
-    missing_cols = set(model.feature_names_in_) - set(input_df.columns)
-    for col in missing_cols:
-        input_df[col] = 0
-    input_df = input_df[model.feature_names_in_]
-
+    # Model pipeline içinde olduğu için, kolon sıralaması yapmaya gerek yok 🎉
     with st.spinner("Making prediction..."):
         prediction = model.predict(input_df)[0]
         prob = model.predict_proba(input_df)[0][1]
