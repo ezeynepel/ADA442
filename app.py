@@ -105,49 +105,45 @@ with col2:
 with col3:
     pass  # Placeholder for symmetry, no additional input here.
 
-# Collecting all the inputs into a dictionary
-input_features_raw = {
-    "age": age,
-    "job": job,
-    "marital": marital,
-    "education": education,
-    "default": default,
-    "housing": housing,
-    "loan": loan,
-    "contact": contact,
-    "month": month,
-    "day_of_week": day_of_week,
-    "duration": duration,
-    "campaign": campaign,
-    "pdays": pdays,
-    "previous": previous,
-    "poutcome": poutcome,
-    "emp.var.rate": emp_var_rate,
-    "cons.price.idx": cons_price_idx,
-    "cons.conf.idx": cons_conf_idx,
-    "euribor3m": euribor3m,
-    "nr.employed": nr_employed
-}
+# --- Tahmin ---
+if submit:
+    input_dict = {
+        'age': age,
+        'job': job,
+        'marital': marital,
+        'education': education,
+        'default': default,
+        'housing': housing,
+        'loan': loan,
+        'contact': contact,
+        'month': month,
+        'day_of_week': day_of_week,
+        'duration': duration,
+        'campaign': campaign,
+        'pdays': pdays,
+        'previous': previous,
+        'poutcome': poutcome,
+        'emp.var.rate': emp_var_rate,
+        'cons.price.idx': cons_price_idx,
+        'cons.conf.idx': cons_conf_idx,
+        'euribor3m': euribor3m,
+        'nr.employed': nr_employed
+    }
 
-# Convert input to a DataFrame and prepare for prediction
-input_df = pd.DataFrame([input_features_raw])
+    input_df = pd.DataFrame([input_dict])
 
-# Dynamically adjust columns to match the model's expected input
-missing_cols = set(model.feature_names_in_) - set(input_df.columns)
-for col in missing_cols:
-    input_df[col] = 0
+    # 🩹 Categorical veride "unknown" varsa NaN olarak işaretle (imputer düzgün çalışsın)
+    for col in input_df.select_dtypes(include='object').columns:
+        input_df[col] = input_df[col].replace("unknown", pd.NA)
 
-# Reorder columns to match the model's expected input
-input_df = input_df[model.feature_names_in_]
-
-# Prediction button
-predict_button = st.button("Predict", key="predict", help="Click here to make a prediction")
-
-if predict_button:
     with st.spinner("Making prediction..."):
         try:
-            # Make the prediction
-            prediction = model.predict(input_df)
-            st.success(f"Prediction: {prediction[0]}")
+            prediction = model.predict(input_df)[0]
+            prob = model.predict_proba(input_df)[0][1]
+
+            if prediction == 'yes':
+                st.success(f"✅ The client is LIKELY to subscribe. (Probability: {prob:.2%})")
+            else:
+                st.error(f"❌ The client is UNLIKELY to subscribe. (Probability: {prob:.2%})")
         except Exception as e:
-            st.error(f"An error occurred: {e}")
+            st.error(f"🚨 An error occurred: {e}")
