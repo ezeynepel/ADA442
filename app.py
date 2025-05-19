@@ -33,7 +33,8 @@ with col1:
     default = st.selectbox("Default Credit", ["yes", "no"])
     contact = st.selectbox("Contact Type", ["cellular", "telephone"])
     emp_var_rate = st.number_input("Empirical Var. Rate", step=0.01)
-    euribor3m = st.number_input("Euribor 3 Month", step=0.01)
+    euribor3m = st.number_input("Euribor 3 Month", step=0.01) 
+    cons_conf_idx = st.number_input("Consumer Confidence Index", step=0.01)
 
 with col2:
     job = st.selectbox("Job", [
@@ -45,6 +46,7 @@ with col2:
     month = st.selectbox("Month", ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"])
     cons_price_idx = st.number_input("Consumer Price Index", step=0.01)
     nr_employed = st.number_input("Number of Employees", step=1)
+    poutcome = st.selectbox("Previous Outcome", ["success", "failure", "nonexistent"])
 
 with col3:
     marital = st.selectbox("Marital Status", ["married", "single", "divorced"])
@@ -53,8 +55,8 @@ with col3:
     campaign = st.number_input("Campaign Contacts", step=1)
     pdays = st.number_input("Days Since Last Contact", step=1)
     previous = st.number_input("Previous Contacts", step=1)
-    cons_conf_idx = st.number_input("Consumer Confidence Index", step=0.01)
-    poutcome = st.selectbox("Previous Outcome", ["success", "failure", "nonexistent"])
+   
+    
 
 # --- Prepare input ---
 ordinal_edu = {
